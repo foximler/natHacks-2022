@@ -7,14 +7,13 @@ import TheWelcome from '@/components/TheWelcome.vue'
 <template>
   <div class="container col-md-14 flex-justify align-middle jumbotron vertical-center">
     <div class="row">
-      <div class="col-sm">
+      <div class="col-sm p-3">
     <img alt="Brain Check" class="logo pb-4" src="@/assets/logo.png" width="125" />
-
     <div class="wrapper">
       <HelloWorld msg="Welcome to Brain Check." />
     </div>
     </div>
-    <div class="col-sm">
+    <div class="col-sm p-3">
   <TheWelcome />
 </div>
 </div>

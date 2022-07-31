@@ -31,7 +31,7 @@ import SupportIcon from '../components/icons/IconSupport.vue'
   </div>
   </div>
   <div class="flex-justify text-center p-5">
-    <button class="btn w-50 btn-weirdgreen justify-content-center" @click="incrementForm(1)"><h2>Begin Hardware Test  <font-awesome-icon icon="fa-solid fa-arrow-right" class="ps-2" /></h2></button>
+    <button class="btn w-75 btn-weirdgreen justify-content-center" @click="incrementForm(1)"><h2>Begin Hardware Test  <font-awesome-icon icon="fa-solid fa-arrow-right" class="ps-2" /></h2></button>
   </div>
   </div>
   <!-- ############### END OF PATIENT INTAKE #################### -->
@@ -75,9 +75,8 @@ import SupportIcon from '../components/icons/IconSupport.vue'
   </div>
   </div>
    <!-- ############### END OF HARDWARE INFO #################### -->
-   <!-- Survey Page-->
+   <!-- Survey Page 1 -->
    <div class="pe-2 col-md-6" v-if="form.index==2">
-    <h1 class="text-center pb-5" style="color:white">Question: 1</h1>
     <div class="row g-3">
   <WelcomeItem>
     <template #icon>
@@ -98,40 +97,222 @@ import SupportIcon from '../components/icons/IconSupport.vue'
     <template #icon>
     <font-awesome-icon icon="fa-solid fa-1" />
     </template>
-    <template #heading>Bad</template>
+    <template #heading> Very Bad</template>
   </WelcomeItem>
    <WelcomeItem :class="{active:webSocket.intput==2}">
     <template #icon>
     <font-awesome-icon icon="fa-solid fa-2" />
     </template>
-    <template #heading>Fair</template>
+    <template #heading>Bad</template>
   </WelcomeItem>
    <WelcomeItem :class="{active:webSocket.intput==3}">
     <template #icon>
     <font-awesome-icon icon="fa-solid fa-3" />
     </template>
-    <template #heading>Good</template>
+    <template #heading>Fair</template>
   </WelcomeItem>
    <WelcomeItem :class="{active:webSocket.intput==4}">
     <template #icon>
     <font-awesome-icon icon="fa-solid fa-4" />
     </template>
-    <template #heading>Excellent</template>
+    <template #heading>Good</template>
+  </WelcomeItem>
+     <WelcomeItem :class="{active:webSocket.intput==5}">
+    <template #icon>
+    <font-awesome-icon icon="fa-solid fa-5" />
+    </template>
+    <template #heading>Very Good</template>
   </WelcomeItem>
 </div>
     <div class="flex-justify text-center p-5 row">
-   
     <div class="pe-2 col-md-6">
-    <button class="btn w-100 btn-weirdgreen justify-content-center" @click="incrementForm(0)"><h2><font-awesome-icon icon="fa-solid fa-arrow-left"/> Back (0)</h2></button>
+    <button class="btn w-100 btn-weirdgreen justify-content-center" @click="incrementForm(0)"><h2><font-awesome-icon icon="fa-solid fa-arrow-left"/> Back <font-awesome-icon icon="fa-solid fa-0"/></h2></button>
   </div>
   <div class="pe-2 col-md-6">
-    <button class="btn w-100 btn-weirdgreen justify-content-center" @click="incrementForm(1)"><h2>Next Question (9)  <font-awesome-icon icon="fa-solid fa-arrow-right" /></h2></button>
+    <button class="btn w-100 btn-weirdgreen justify-content-center" @click="incrementForm(1)"><h2>Next Question <font-awesome-icon icon="fa-solid fa-9"/>  <font-awesome-icon icon="fa-solid fa-arrow-right" /></h2></button>
   </div>
   </div>
   </div>
     <!-- ############### END OF Survey pg 1 #################### -->
-      <!-- ############### Begin  #################### -->
-<div class="pe-2 col-md-6" v-if="form.index==3">
+       <!-- Survey Page 2 -->
+   <div class="pe-2 col-md-6" v-if="form.index==3">
+    <div class="row g-3">
+  <WelcomeItem>
+    <template #icon>
+    <font-awesome-icon icon="fa-solid fa-bullseye" />
+    </template>
+    <template #heading>Confidence</template>
+    <b style="color:orange">fair</b>, the model is reporting 59% confidence.
+  </WelcomeItem>
+   <WelcomeItem>
+    <template #icon>
+    <font-awesome-icon icon="fa-solid fa-clock" />
+    </template>
+    <template #heading>Time</template>
+    Please visualize each anwser for one second.
+  </WelcomeItem>
+<h2 class="text-center p-3">How would you rate your sleep recently?</h2>
+ <WelcomeItem :class="{active:webSocket.intput==1}">
+    <template #icon>
+    <font-awesome-icon icon="fa-solid fa-1" />
+    </template>
+    <template #heading> Very Bad</template>
+  </WelcomeItem>
+   <WelcomeItem :class="{active:webSocket.intput==2}">
+    <template #icon>
+    <font-awesome-icon icon="fa-solid fa-2" />
+    </template>
+    <template #heading>Bad</template>
+  </WelcomeItem>
+   <WelcomeItem :class="{active:webSocket.intput==3}">
+    <template #icon>
+    <font-awesome-icon icon="fa-solid fa-3" />
+    </template>
+    <template #heading>Fair</template>
+  </WelcomeItem>
+   <WelcomeItem :class="{active:webSocket.intput==4}">
+    <template #icon>
+    <font-awesome-icon icon="fa-solid fa-4" />
+    </template>
+    <template #heading>Good</template>
+  </WelcomeItem>
+     <WelcomeItem :class="{active:webSocket.intput==5}">
+    <template #icon>
+    <font-awesome-icon icon="fa-solid fa-5" />
+    </template>
+    <template #heading>Very Good</template>
+  </WelcomeItem>
+</div>
+    <div class="flex-justify text-center p-5 row">
+    <div class="pe-2 col-md-6">
+    <button class="btn w-100 btn-weirdgreen justify-content-center" @click="incrementForm(0)"><h2><font-awesome-icon icon="fa-solid fa-arrow-left"/> Back <font-awesome-icon icon="fa-solid fa-0"/></h2></button>
+  </div>
+  <div class="pe-2 col-md-6">
+    <button class="btn w-100 btn-weirdgreen justify-content-center" @click="incrementForm(1)" ><h2>Next Question <font-awesome-icon icon="fa-solid fa-9" class="border" />  <font-awesome-icon icon="fa-solid fa-arrow-right" /></h2></button>
+  </div>
+  </div>
+  </div>
+    <!-- ############### END OF Survey pg 2 #################### -->
+       <!-- Survey Page 3-->
+   <div class="pe-2 col-md-6" v-if="form.index==4">
+    <div class="row g-3">
+  <WelcomeItem>
+    <template #icon>
+    <font-awesome-icon icon="fa-solid fa-bullseye" />
+    </template>
+    <template #heading>Confidence</template>
+    <b style="color:orange">fair</b>, the model is reporting 59% confidence.
+  </WelcomeItem>
+   <WelcomeItem>
+    <template #icon>
+    <font-awesome-icon icon="fa-solid fa-clock" />
+    </template>
+    <template #heading>Time</template>
+    Please visualize each anwser for one second.
+  </WelcomeItem>
+<h2 class="text-center p-3">How are you feeling today?</h2>
+ <WelcomeItem :class="{active:webSocket.intput==1}">
+    <template #icon>
+    <font-awesome-icon icon="fa-solid fa-1" />
+    </template>
+    <template #heading> Very Bad</template>
+  </WelcomeItem>
+   <WelcomeItem :class="{active:webSocket.intput==2}">
+    <template #icon>
+    <font-awesome-icon icon="fa-solid fa-2" />
+    </template>
+    <template #heading>Bad</template>
+  </WelcomeItem>
+   <WelcomeItem :class="{active:webSocket.intput==3}">
+    <template #icon>
+    <font-awesome-icon icon="fa-solid fa-3" />
+    </template>
+    <template #heading>Fair</template>
+  </WelcomeItem>
+   <WelcomeItem :class="{active:webSocket.intput==4}">
+    <template #icon>
+    <font-awesome-icon icon="fa-solid fa-4" />
+    </template>
+    <template #heading>Good</template>
+  </WelcomeItem>
+     <WelcomeItem :class="{active:webSocket.intput==5}">
+    <template #icon>
+    <font-awesome-icon icon="fa-solid fa-5" />
+    </template>
+    <template #heading>Very Good</template>
+  </WelcomeItem>
+</div>
+    <div class="flex-justify text-center p-5 row">
+    <div class="pe-2 col-md-6">
+    <button class="btn w-100 btn-weirdgreen justify-content-center" @click="incrementForm(0)"><h2><font-awesome-icon icon="fa-solid fa-arrow-left"/> Back <font-awesome-icon icon="fa-solid fa-0"/></h2></button>
+  </div>
+  <div class="pe-2 col-md-6">
+    <button class="btn w-100 btn-weirdgreen justify-content-center" @click="incrementForm(1)"><h2>Next Question <font-awesome-icon icon="fa-solid fa-9"/>  <font-awesome-icon icon="fa-solid fa-arrow-right" /></h2></button>
+  </div>
+  </div>
+  </div>
+    <!-- ############### END OF Survey pg 4 #################### -->
+       <!-- Survey Page 4 -->
+   <div class="pe-2 col-md-6" v-if="form.index==5">
+    <div class="row g-3">
+  <WelcomeItem>
+    <template #icon>
+    <font-awesome-icon icon="fa-solid fa-bullseye" />
+    </template>
+    <template #heading>Confidence</template>
+    <b style="color:orange">fair</b>, the model is reporting 59% confidence.
+  </WelcomeItem>
+   <WelcomeItem>
+    <template #icon>
+    <font-awesome-icon icon="fa-solid fa-clock" />
+    </template>
+    <template #heading>Time</template>
+    Please visualize each anwser for one second.
+  </WelcomeItem>
+<h2 class="text-center p-3">How are you feeling today?</h2>
+ <WelcomeItem :class="{active:webSocket.intput==1}">
+    <template #icon>
+    <font-awesome-icon icon="fa-solid fa-1" />
+    </template>
+    <template #heading> Very Bad</template>
+  </WelcomeItem>
+   <WelcomeItem :class="{active:webSocket.intput==2}">
+    <template #icon>
+    <font-awesome-icon icon="fa-solid fa-2" />
+    </template>
+    <template #heading>Bad</template>
+  </WelcomeItem>
+   <WelcomeItem :class="{active:webSocket.intput==3}">
+    <template #icon>
+    <font-awesome-icon icon="fa-solid fa-3" />
+    </template>
+    <template #heading>Fair</template>
+  </WelcomeItem>
+   <WelcomeItem :class="{active:webSocket.intput==4}">
+    <template #icon>
+    <font-awesome-icon icon="fa-solid fa-4" />
+    </template>
+    <template #heading>Good</template>
+  </WelcomeItem>
+     <WelcomeItem :class="{active:webSocket.intput==5}">
+    <template #icon>
+    <font-awesome-icon icon="fa-solid fa-5" />
+    </template>
+    <template #heading>Very Good</template>
+  </WelcomeItem>
+</div>
+    <div class="flex-justify text-center p-5 row">
+    <div class="pe-2 col-md-6">
+    <button class="btn w-100 btn-weirdgreen justify-content-center" @click="incrementForm(0)"><h2><font-awesome-icon icon="fa-solid fa-arrow-left"/> Back <font-awesome-icon icon="fa-solid fa-0" class="border"/></h2></button>
+  </div>
+  <div class="pe-2 col-md-6">
+    <button class="btn w-100 btn-weirdgreen justify-content-center" @click="incrementForm(1)"><h2>Next Question <font-awesome-icon icon="fa-solid fa-9" class="border"/>  <font-awesome-icon icon="fa-solid fa-arrow-right" /></h2></button>
+  </div>
+  </div>
+  </div>
+    <!-- ############### END OF Survey pg 4 #################### -->
+      <!-- ############### Begin Final Buttons  #################### -->
+<div class="pe-2 col-md-6" v-if="form.index==6">
     <div class="flex-justify text-center p-5 row">
    
     <div class="pe-2 col-md-6">
@@ -149,12 +330,23 @@ import SupportIcon from '../components/icons/IconSupport.vue'
 </style>
 <script>
   import { mapGetters, mapActions, mapMutations } from "vuex";
+import { io } from "socket.io-client";
+
+const socket = io("localhost:3000");
 
 export default {
   name: "Job",
   components: { },
   beforeMount() {
   },
+  sockets: {
+        connect: function () {
+            console.log('socket connected')
+        },
+        customEmit: function (data) {
+            console.log('this method was fired by the socket server. eg: io.emit("customEmit", data)')
+        }
+    },
   data() {
     return {
       webSocket:{
@@ -196,6 +388,16 @@ export default {
   }
   .active{
     background-color: hsla(160, 100%, 37%, 1) !important;
+    border-radius: 100px;
+    background-size: 100% 50%;
     color: white;
+  }
+  .border{
+    border-radius: 10px;
+    border: 5px solid;
+    width:35px;
+    height: 35px; 
+    padding-left:3px;
+    padding-right:3px;
   }
 </style>
