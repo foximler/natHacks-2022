@@ -12,6 +12,7 @@ import HelloWorld from './components/HelloWorld.vue'
   </div>
         <RouterLink to="/" class="p-3 rounded" :class="{active:$route.name =='landing'}">Home</RouterLink> 
         <RouterLink to="/survey" class="p-3 rounded" :class="{active:$route.name=='survey'}">Survey</RouterLink>
+        <RouterLink to="/patient" class="p-3 rounded" :class="{active:$route.name=='patient'}">Patient View</RouterLink>
       </nav>
     </div>
 <RouterView />
