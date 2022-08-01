@@ -3,11 +3,11 @@
         <!-- Patient Intake Form -->
         <div class="col-md-12 text-center">
             <h1 class="vcenter">
-                <font-awesome-icon @click="setInt(1)" icon="fa-solid fa-1" class="p-5" />
-                <font-awesome-icon @click="setInt(2)" icon="fa-solid fa-2" class="p-5" />
-                <font-awesome-icon @click="setInt(3)" icon="fa-solid fa-3" class="p-5" />
-                <font-awesome-icon @click="setInt(4)" icon="fa-solid fa-4" class="p-5" />
-                <font-awesome-icon @click="setInt(5)" icon="fa-solid fa-5" class="p-5" />
+                <font-awesome-icon @click="setInt(1)" icon="fa-solid fa-1" class="p-5" :class="{selected:webSocket.intput==1}"/>
+                <font-awesome-icon @click="setInt(2)" icon="fa-solid fa-2" class="p-5" :class="{selected:webSocket.intput==2}"/>
+                <font-awesome-icon @click="setInt(3)" icon="fa-solid fa-3" class="p-5" :class="{selected:webSocket.intput==3}"/>
+                <font-awesome-icon @click="setInt(4)" icon="fa-solid fa-4" class="p-5" :class="{selected:webSocket.intput==4}"/>
+                <font-awesome-icon @click="setInt(5)" icon="fa-solid fa-5" class="p-5" :class="{selected:webSocket.intput==5}"/>
             </h1>
         </div>
     </div>
@@ -42,11 +42,15 @@ export default {
     name: "Job",
     components: {},
     beforeMount() {
+        socket.on("wsUpdate", (data) => {
+            this.webSocket = data
+        });
     },
     data() {
         return {
             webSocket: {
-                intput: 1
+                intput: null,
+                confidence:null
             },
             form: {
                 index: 0,
@@ -76,6 +80,9 @@ export default {
 .white {
     color: white;
 
+}
+.selected {
+    color: green;
 }
 
 </style>

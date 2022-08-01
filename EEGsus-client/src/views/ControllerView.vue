@@ -3,11 +3,11 @@
         <!-- Patient Intake Form -->
         <div class="col-md-12 text-center">
             <h1 class="vcenter">
-                <font-awesome-icon icon="fa-solid fa-1" class="p-5" />
-                <font-awesome-icon icon="fa-solid fa-2" class="p-5" />
-                <font-awesome-icon icon="fa-solid fa-3" class="p-5" />
-                <font-awesome-icon icon="fa-solid fa-4" class="p-5" />
-                <font-awesome-icon icon="fa-solid fa-5" class="p-5" />
+                <font-awesome-icon icon="fa-solid fa-1" class="p-5" :class="{selected:webSocket.intput==1}" />
+                <font-awesome-icon icon="fa-solid fa-2" class="p-5" :class="{selected:webSocket.intput==2}"/>
+                <font-awesome-icon icon="fa-solid fa-3" class="p-5" :class="{selected:webSocket.intput==3}"/>
+                <font-awesome-icon icon="fa-solid fa-4" class="p-5" :class="{selected:webSocket.intput==4}"/>
+                <font-awesome-icon icon="fa-solid fa-5" class="p-5" :class="{selected:webSocket.intput==5}"/>
             </h1>
         </div>
     </div>
@@ -43,6 +43,7 @@ export default {
     components: {},
     beforeMount() {
         socket.on("indexPlay", (data) => {
+            this.webSocket.intput==null
             play(`/${data}.wav`).then(function() {
                 wait(1500)
                 play('/beep.wav')
@@ -51,12 +52,17 @@ export default {
         socket.on("instructionPlay", (data) => {
             play(`/${data}.wav`)
         });
+        socket.on("wsUpdate", (data) => {
+            console.log(data)
+            this.webSocket = data
+        });
     },
     data() {
         return {
-            webSocket: {
-                intput: 1
-            },
+            webSocket:{
+        intput:null,
+        confidence:0,
+      },
             form: {
                 index: 0,
                 patientInfo: {
@@ -81,6 +87,9 @@ export default {
 .white {
     color: white;
 
+}
+.selected {
+    color: green;
 }
 
 </style>

@@ -50,14 +50,10 @@ def feedModel(sid,input):
   dataHandler(data[input][:,:271])
   
 def dataHandler(data):
-  #load model
-  #plug data into model
-  #return value via
   model = create_model()
   model.load_weights('./model')
   coef, freqs = pywt.cwt(data,len(data),'morl',method='fft')
   modelOut = model.predict( np.expand_dims(min_max_scaler.fit_transform(coef[0]), axis=0))
-  print(np.max(modelOut[0]))
   sio.emit("wsUpdate",{'intput':str(np.argmax(modelOut[0])),'confidence':str(np.max(modelOut[0]))})
 
 def create_model():
@@ -84,4 +80,4 @@ def create_model():
           tf.keras.metrics.MeanSquaredError(), 'accuracy'],)
   return model
 if __name__ == '__main__':
-  eventlet.wsgi.server(eventlet.listen(('', 3000)), app)
+  eventlet.wsgi.server(eventlet.listen(('0.0.0.0', 3000)), app)
