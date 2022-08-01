@@ -85,7 +85,7 @@ import SupportIcon from '../components/icons/IconSupport.vue'
     <font-awesome-icon icon="fa-solid fa-bullseye" />
     </template>
     <template #heading>Confidence</template>
-    <b style="color:orange">fair</b>, the model is reporting 59% confidence.
+    the model is reporting {{webSocket.confidence*100}}% confidence.
   </WelcomeItem>
 <h2 class="text-center p-3" v-if="form.index==2">How would you rate your quality of life?</h2>
 <h2 class="text-center p-3" v-if="form.index==3">How satisfied are you with your health?</h2>
@@ -147,7 +147,7 @@ import SupportIcon from '../components/icons/IconSupport.vue'
       <!-- ############### Begin Final Buttons  #################### -->
       <div class="pe-2 col-md-6" v-if="form.index==11">
         <h2 class="p-5">The survey is complete and the patient can have the sensors removed.</h2>
-    <button class="btn w-100 btn-weirdgreen justify-content-center" @click="incrementForm(1)"><h2>Save Details  <font-awesome-icon icon="fa-solid fa-download" /></h2></button>
+    <button class="btn w-100 btn-weirdgreen justify-content-center" @click="saveData()"><h2>Save Details  <font-awesome-icon icon="fa-solid fa-download" /></h2></button>
     <div class="p-5">
     <button class="btn w-100 btn-danger justify-content-center" @click="form.index=0"><h2>Reset Form </h2></button>
   </div>
@@ -165,11 +165,15 @@ const socket = io("localhost:3000");
 export default {
   name: "controller",
   beforeMount() {
+    socket.on("wsUpdate", (data) => {
+            this.webSocket = data
+        });
   },
   data() {
     return {
       webSocket:{
-        intput:1
+        intput:1,
+        confidence:0,
       },
       form:{
       index:0,
@@ -187,19 +191,27 @@ export default {
   },
   methods: {
     saveData(){
-      console.log(svyData)
+      const data = JSON.stringify(this.form)
+    const blob = new Blob([data], {type: 'text/plain'})
+    const e = document.createEvent('MouseEvents'),
+    a = document.createElement('a');
+    a.download = "test.json";
+    a.href = window.URL.createObjectURL(blob);
+    a.dataset.downloadurl = ['text/json', a.download, a.href].join(':');
+    e.initEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+    a.dispatchEvent(e);
     },
     incrementForm(val){
       switch(val){
         case 0:
             socket.emit("changePage",this.form.index)
             this.form.index -=1
-            this.surveyData.pop()
+            this.form.surveyData.pop()
             break;
         case 1:
             socket.emit("changePage",this.form.index)
             this.form.index +=1
-            this.surveyData.push(this.form)
+            this.form.surveyData.push({value:this.webSocket.intput,confidence:this.webSocket.confidence})
             break;
       }
     },
@@ -207,13 +219,15 @@ export default {
       if (this.form.index == 11|| this.form.index ==1){
         switch(this.form.index){
           case 1:
-           socket.emit("playsound",'intro')
+           socket.emit("playSentence",'intro')
            break;
            case 11:
-           socket.emit("playsound",'intro')
+           socket.emit("playSentence",'final')
            break;
         }
-       socket.emit("playSound",this.form.index) 
+      }
+      else{
+        socket.emit("playSound",this.form.index) 
       }
     }
   },

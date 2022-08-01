@@ -1,10 +1,13 @@
 <template>
     <div class="d-flex justify-content-center white">
         <!-- Patient Intake Form -->
-        <div class="col-md-6 text-center pt-5">
-            <h3>Please focus on the cross and follow the auditory cues.</h3>
+        <div class="col-md-12 text-center">
             <h1 class="vcenter">
-                <font-awesome-icon icon="fa-solid fa-plus" class="p-5" />
+                <font-awesome-icon icon="fa-solid fa-1" class="p-5" />
+                <font-awesome-icon icon="fa-solid fa-2" class="p-5" />
+                <font-awesome-icon icon="fa-solid fa-3" class="p-5" />
+                <font-awesome-icon icon="fa-solid fa-4" class="p-5" />
+                <font-awesome-icon icon="fa-solid fa-5" class="p-5" />
             </h1>
         </div>
     </div>
@@ -72,11 +75,12 @@ export default {
 </script>
 <style>
 .vcenter {
-    margin-top: 25%;
+    margin-top: 20%;
 }
 
 .white {
     color: white;
 
 }
+
 </style>
