@@ -65,7 +65,9 @@ import SupportIcon from '../components/icons/IconSupport.vue'
   </WelcomeItem>
   </div>
   <div class="flex-justify text-center p-5 row">
-   
+   <div class="p-5 col-md-12">
+    <button class="btn w-100 btn-weirdgreen justify-content-center" @click="playSound()"><h2><font-awesome-icon icon="fa-solid fa-play"/> Play Instructions</h2></button>
+  </div>
     <div class="pe-2 col-md-6">
     <button class="btn w-100 btn-weirdgreen justify-content-center" @click="incrementForm(0)"><h2><font-awesome-icon icon="fa-solid fa-arrow-left"/> Back</h2></button>
   </div>
@@ -84,13 +86,6 @@ import SupportIcon from '../components/icons/IconSupport.vue'
     </template>
     <template #heading>Confidence</template>
     <b style="color:orange">fair</b>, the model is reporting 59% confidence.
-  </WelcomeItem>
-   <WelcomeItem>
-    <template #icon>
-    <font-awesome-icon icon="fa-solid fa-clock" />
-    </template>
-    <template #heading>Time</template>
-    Please visualize each anwser for one second.
   </WelcomeItem>
 <h2 class="text-center p-3" v-if="form.index==2">How would you rate your quality of life?</h2>
 <h2 class="text-center p-3" v-if="form.index==3">How satisfied are you with your health?</h2>
@@ -191,20 +186,35 @@ export default {
   computed: {
   },
   methods: {
+    saveData(){
+      console.log(svyData)
+    },
     incrementForm(val){
       switch(val){
         case 0:
             socket.emit("changePage",this.form.index)
             this.form.index -=1
-          break;
+            this.surveyData.pop()
+            break;
         case 1:
             socket.emit("changePage",this.form.index)
             this.form.index +=1
-          break;
+            this.surveyData.push(this.form)
+            break;
       }
     },
     playSound(){
-       socket.emit("playSound",this.form.index)
+      if (this.form.index == 11|| this.form.index ==1){
+        switch(this.form.index){
+          case 1:
+           socket.emit("playsound",'intro')
+           break;
+           case 11:
+           socket.emit("playsound",'intro')
+           break;
+        }
+       socket.emit("playSound",this.form.index) 
+      }
     }
   },
 };

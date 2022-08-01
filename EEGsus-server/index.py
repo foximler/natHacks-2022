@@ -21,6 +21,10 @@ def disconnect(sid):
 @sio.event
 def playSound(sid,data):
   print(data)
+  if data == sentence:
+  sio.emit('instructionPlay', data)
+else:
   sio.emit('clientPlay', data-1)
+
 if __name__ == '__main__':
   eventlet.wsgi.server(eventlet.listen(('', 3000)), app)
